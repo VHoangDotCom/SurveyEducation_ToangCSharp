@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.Data.Entity;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -24,7 +25,11 @@ namespace SurveyForEducationAPI.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-        
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Survey> Surveys { get; set; }
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<Answer> Answers { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

@@ -114,3 +114,6 @@ D:\epc\Ap-Sem3\Agile Development\Git Project\SurveyForEducationAPI\SurveyForEduc
 D:\epc\Ap-Sem3\Agile Development\Git Project\SurveyForEducationAPI\SurveyForEducationAPI\obj\Debug\SurveyForEducationAPI.csproj.CopyComplete
 D:\epc\Ap-Sem3\Agile Development\Git Project\SurveyForEducationAPI\SurveyForEducationAPI\obj\Debug\SurveyForEducationAPI.dll
 D:\epc\Ap-Sem3\Agile Development\Git Project\SurveyForEducationAPI\SurveyForEducationAPI\obj\Debug\SurveyForEducationAPI.pdb
+D:\epc\Ap-Sem3\Agile Development\Git Project\SurveyForEducationAPI\SurveyForEducationAPI\obj\Debug\SurveyForEducationAPI.Migrations.InitDB.resources
+D:\epc\Ap-Sem3\Agile Development\Git Project\SurveyForEducationAPI\SurveyForEducationAPI\obj\Debug\SurveyForEducationAPI.csproj.GenerateResource.cache
+D:\epc\Ap-Sem3\Agile Development\Git Project\SurveyForEducationAPI\SurveyForEducationAPI\obj\Debug\SurveyForEducationAPI.Migrations.NewInit.resources
