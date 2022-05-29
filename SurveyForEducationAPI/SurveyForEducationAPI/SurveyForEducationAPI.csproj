@@ -236,6 +236,7 @@
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\Survey.cs" />
+    <Compile Include="Models\ViewModels\CategoryIndexData.cs" />
     <Compile Include="Models\ViewModels\CategoryViewModel.cs" />
     <Compile Include="Models\ViewModels\QuestionViewModel.cs" />
     <Compile Include="Models\ViewModels\SurveyViewModel.cs" />

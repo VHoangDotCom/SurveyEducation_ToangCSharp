@@ -1,10 +1,10 @@
-﻿@model IEnumerable<SurveyForEducationAPI.Models.Category>
+﻿@model SurveyForEducationAPI.Models.ViewModels.CategoryIndexData
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Categories";
 }
 
-<h2>Index</h2>
+<h2>Categories</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,22 +12,96 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            Category name
         </th>
+
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model.Categories)
+    {
+        string selectedRow = "";
+        if (item.Id == ViewBag.CateID)
+        {
+            selectedRow = "success";
+        }
+        <tr class="@selectedRow">
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+
+            <td>
+                @Html.ActionLink("Select", "Index", new { id = item.Id }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>
+
+@if (Model.Surveys != null)
+{
+    <h3>Surveys by Selected Instructor</h3>
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>No.</th>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Created date</th>
+        </tr>
+
+        @foreach (var item in Model.Surveys)
+        {
+            string selectedRow = "";
+            if (item.Id == ViewBag.SurID)
+            {
+                selectedRow = "success";
+            }
+            <tr class="@selectedRow">
+                <td>
+                    @Html.ActionLink("Select", "Index", new { surveyID = item.Id })
+                </td>
+                <td>
+                    @item.Id
+                </td>
+                <td>
+                    @item.Title
+                </td>
+                <td>
+                    @item.Status
+                </td>
+                <td>
+                    @item.CreatedAt
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+
+@if (Model.Questions != null)
+{
+    <h3>
+        Questions of this Survey
+    </h3>
+    <table class="table">
+        <tr>
+            <th>Title</th>
+            <th>Status</th>
+        </tr>
+        @foreach (var item in Model.Questions)
+        {
+            <tr>
+                <td>
+                    @item.Title
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+            </tr>
+        }
+    </table>
+}

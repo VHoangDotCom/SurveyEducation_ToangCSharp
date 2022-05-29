@@ -17,7 +17,8 @@ namespace SurveyForEducationAPI.Controllers
         // GET: Surveys
         public ActionResult Index()
         {
-            return View(db.Surveys.ToList());
+            var surveys = db.Surveys.Include(c => c.Category);
+            return View(surveys.ToList());
         }
 
         // GET: Surveys/Details/5
@@ -38,6 +39,7 @@ namespace SurveyForEducationAPI.Controllers
         // GET: Surveys/Create
         public ActionResult Create()
         {
+            PopulateDepartmentsDropDownList();
             return View();
         }
 
@@ -62,7 +64,7 @@ namespace SurveyForEducationAPI.Controllers
                 //Log the error (uncomment dex variable name and add a line here to write a log.
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
-
+            PopulateDepartmentsDropDownList(survey.Category.Id);
             return View(survey);
         }
 
@@ -73,6 +75,9 @@ namespace SurveyForEducationAPI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            var surveyToUpdate = db.Surveys.Find(id);
+
             Survey survey = db.Surveys.Find(id);
             if (survey == null)
             {
@@ -107,7 +112,16 @@ namespace SurveyForEducationAPI.Controllers
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
                 }              
             }
+            PopulateDepartmentsDropDownList(surveyToUpdate.Category.Id);
             return View(surveyToUpdate);
+        }
+
+        private void PopulateDepartmentsDropDownList(object selectedDepartment = null)
+        {
+            var surveysQuery = from d in db.Categories
+                                   orderby d.Name
+                                   select d;
+            ViewBag.Id = new SelectList(surveysQuery, "Id", "Name", selectedDepartment);
         }
 
         // GET: Surveys/Delete/5

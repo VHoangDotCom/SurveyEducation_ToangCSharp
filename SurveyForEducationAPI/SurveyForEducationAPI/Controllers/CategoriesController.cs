@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SurveyForEducationAPI.Models;
+using SurveyForEducationAPI.Models.ViewModels;
 
 namespace SurveyForEducationAPI.Controllers
 {
@@ -15,9 +16,39 @@ namespace SurveyForEducationAPI.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Categories
-        public ActionResult Index()
+        public ActionResult Index(int? id, int? surveyID)
         {
-            return View(db.Categories.ToList());
+            var viewModel = new CategoryIndexData();
+            viewModel.Categories = db.Categories
+                .Include(i => i.Surveys)
+                .Include(i => i.Surveys.Select(c => c.Questions))
+                .Include(i => i.Surveys.Select(c => c.Questions.Select(d => d.Answers)))
+                .OrderBy(i => i.Name);
+
+            if (id != null)
+            {
+                ViewBag.CateID = id.Value;
+                viewModel.Surveys = viewModel.Categories.Where(
+                    i => i.Id == id.Value).Single().Surveys;
+            }
+
+            if(surveyID != null)
+            {
+                ViewBag.SurID = surveyID.Value;
+                viewModel.Questions = viewModel.Surveys.Where(
+                    x => x.Id == surveyID).Single().Questions;
+
+                var selectedSurvey = viewModel.Surveys.Where(x => x.Id == surveyID).Single();
+                db.Entry(selectedSurvey).Collection(x => x.Questions).Load();
+                foreach (Question question in selectedSurvey.Questions)
+                {
+                    db.Entry(question).Reference(x => x.Answers).Load();
+                }
+
+                viewModel.Questions = selectedSurvey.Questions;
+            }
+
+            return View(viewModel);
         }
 
         // GET: Categories/Details/5
