@@ -17,6 +17,8 @@ namespace SurveyForEducationAPI.Models
         public int Id { get; set; }
         public string Content { get; set; }
 
+       
+
         [DisplayFormat(NullDisplayText = "Type not set")]
         public Type? Type { get; set; }
 

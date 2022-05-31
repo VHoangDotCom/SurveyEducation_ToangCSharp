@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32002.261
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyAPI", "SurveyAPI\SurveyAPI.csproj", "{79FC103D-22FB-4148-A884-A2CD0C954772}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{79FC103D-22FB-4148-A884-A2CD0C954772}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79FC103D-22FB-4148-A884-A2CD0C954772}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79FC103D-22FB-4148-A884-A2CD0C954772}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79FC103D-22FB-4148-A884-A2CD0C954772}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {732D5D10-CF02-4F77-BAAB-BDC5287F300A}
+	EndGlobalSection
+EndGlobal
