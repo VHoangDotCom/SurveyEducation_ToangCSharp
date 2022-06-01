@@ -207,7 +207,6 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\APIController\AnswerSubmitsController.cs" />
-    <Compile Include="Controllers\APIController\ApplicationUsersController.cs" />
     <Compile Include="Controllers\APIController\CategoriesController.cs" />
     <Compile Include="Controllers\APIController\OptionQuestionsController.cs" />
     <Compile Include="Controllers\APIController\QuestionsController.cs" />
@@ -216,8 +215,13 @@
     <Compile Include="Controllers\APIController\UserSurveysController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\ViewController\AnswerSubmitsController.cs" />
     <Compile Include="Controllers\ViewController\CategoriesController.cs" />
+    <Compile Include="Controllers\ViewController\OptionQuestionsController.cs" />
+    <Compile Include="Controllers\ViewController\QuestionsController.cs" />
     <Compile Include="Controllers\ViewController\SurveysController.cs" />
+    <Compile Include="Controllers\ViewController\TextAnswersController.cs" />
+    <Compile Include="Controllers\ViewController\UserSurveysController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -306,6 +310,31 @@
     <Content Include="Views\Surveys\Details.cshtml" />
     <Content Include="Views\Surveys\Edit.cshtml" />
     <Content Include="Views\Surveys\Index.cshtml" />
+    <Content Include="Views\Questions\Create.cshtml" />
+    <Content Include="Views\Questions\Delete.cshtml" />
+    <Content Include="Views\Questions\Details.cshtml" />
+    <Content Include="Views\Questions\Edit.cshtml" />
+    <Content Include="Views\Questions\Index.cshtml" />
+    <Content Include="Views\OptionQuestions\Create.cshtml" />
+    <Content Include="Views\OptionQuestions\Delete.cshtml" />
+    <Content Include="Views\OptionQuestions\Details.cshtml" />
+    <Content Include="Views\OptionQuestions\Edit.cshtml" />
+    <Content Include="Views\OptionQuestions\Index.cshtml" />
+    <Content Include="Views\AnswerSubmits\Create.cshtml" />
+    <Content Include="Views\AnswerSubmits\Delete.cshtml" />
+    <Content Include="Views\AnswerSubmits\Details.cshtml" />
+    <Content Include="Views\AnswerSubmits\Edit.cshtml" />
+    <Content Include="Views\AnswerSubmits\Index.cshtml" />
+    <Content Include="Views\TextAnswers\Create.cshtml" />
+    <Content Include="Views\TextAnswers\Delete.cshtml" />
+    <Content Include="Views\TextAnswers\Details.cshtml" />
+    <Content Include="Views\TextAnswers\Edit.cshtml" />
+    <Content Include="Views\TextAnswers\Index.cshtml" />
+    <Content Include="Views\UserSurveys\Create.cshtml" />
+    <Content Include="Views\UserSurveys\Delete.cshtml" />
+    <Content Include="Views\UserSurveys\Details.cshtml" />
+    <Content Include="Views\UserSurveys\Edit.cshtml" />
+    <Content Include="Views\UserSurveys\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
