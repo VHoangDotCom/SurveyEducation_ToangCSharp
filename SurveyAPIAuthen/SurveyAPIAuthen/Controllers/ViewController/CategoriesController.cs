@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Nest;
+using PagedList;
 using SurveyAPIAuthen.Models;
+using SurveyAPIAuthen.Services;
 
 namespace SurveyAPIAuthen.Controllers.ViewController
 {
@@ -15,10 +19,125 @@ namespace SurveyAPIAuthen.Controllers.ViewController
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Categories
-        public ActionResult Index()
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(db.Categories.ToList());
+            ViewBag.CurrentSort = sortOrder; //PageList
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+            //PageList + search ajax
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+
+            //Search by Linq
+            var categories = db.Categories.AsQueryable();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                categories = categories.Where(s => s.Name.Contains(searchString));
+            }
+
+            //Search by ElasticSearch
+           /* var categoriesList = db.Categories.AsQueryable().ToList();
+            var searchRequest = new SearchRequest<Category>()
+            {
+                From = 0,
+                Size = 10,
+                QueryOnQueryString = searchString
+            };
+            var searchResult = ElasticSearchService.GetInstance().Search<Category>(searchRequest);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                categoriesList = searchResult.Documents.ToList();
+            }*/
+
+            //Order by Name
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    categories = categories.OrderBy(s => s.Name);
+                    break;
+                default:
+                    categories = categories.OrderBy(s => s.ID);
+                    break;
+            }
+
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+
+            //list by linq
+            return View(categories.ToPagedList(pageNumber, pageSize));
+
+            //list by elastic
+            //return View(categories.ToPagedList(pageNumber, pageSize));
+            
         }
+
+        public ActionResult IndexAjax(string sortOrder, string currentFilter, string searchString, int? page)
+        {
+            ViewBag.CurrentSort = sortOrder; //PageList
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+            //PageList + search ajax
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+
+            //Search by Linq
+            var categories = db.Categories.AsQueryable();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                categories = categories.Where(s => s.Name.Contains(searchString));
+            }
+
+            //Search by ElasticSearch
+          /*  var categoriesList = db.Categories.AsQueryable().ToList();
+            var searchRequest = new SearchRequest<Category>()
+            {
+                From = 0,
+                Size = 10,
+                QueryOnQueryString = searchString
+            };
+            var searchResult = ElasticSearchService.GetInstance().Search<Category>(searchRequest);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                categoriesList = searchResult.Documents.ToList();
+            }*/
+
+            //Order by Name
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    categories = categories.OrderBy(s => s.Name);
+                    break;
+                default:
+                    categories = categories.OrderBy(s => s.ID);
+                    break;
+            }
+
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+
+            //list by linq
+            return PartialView(categories.ToPagedList(pageNumber, pageSize));
+
+            //list by elastic
+            //return PartialView(categories.ToPagedList(pageNumber, pageSize));
+        }
+
 
         // GET: Categories/Details/5
         public ActionResult Details(int? id)
@@ -48,11 +167,20 @@ namespace SurveyAPIAuthen.Controllers.ViewController
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Name")] Category category)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Categories.Add(category);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    ElasticSearchService.GetInstance().IndexDocument(category);
+                    db.Categories.Add(category);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (RetryLimitExceededException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.)
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
             }
 
             return View(category);
@@ -80,12 +208,22 @@ namespace SurveyAPIAuthen.Controllers.ViewController
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Name")] Category category)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(category).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    ElasticSearchService.GetInstance().IndexDocument(category);
+                    db.Entry(category).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
+            catch (RetryLimitExceededException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.)
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+            }
+            
             return View(category);
         }
 
@@ -109,6 +247,7 @@ namespace SurveyAPIAuthen.Controllers.ViewController
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+
             Category category = db.Categories.Find(id);
             db.Categories.Remove(category);
             db.SaveChanges();
