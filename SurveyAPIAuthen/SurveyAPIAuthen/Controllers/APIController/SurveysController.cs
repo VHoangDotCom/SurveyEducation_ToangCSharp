@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using SurveyAPIAuthen.Models;
@@ -24,16 +25,47 @@ namespace SurveyAPIAuthen.Controllers.APIController
 
         // GET: api/Surveys/5
         [ResponseType(typeof(Survey))]
-        public IHttpActionResult GetSurvey(int id)
+        public async Task<IHttpActionResult> GetSurvey(int id)
         {
-            Survey survey = db.Surveys.Find(id);
-            if (survey == null)
-            {
-                return NotFound();
-            }
+            Survey surveyOne = db.Surveys.Find(id);
+           var datajoin = await db.Surveys.Where(s => s.ID == id)
+                .Join(
+                db.Questions, 
+                survey => survey.ID,
+                question => question.SurveyID,
+                (survey, question)=> new {
+                    ID = question.ID,
+                    SurveyID = question.SurveyID,
+                    QuestionText = question.QuestionText,
+                    QuestionType = question.QuestionType
+                }
+                ).ToListAsync();
 
-            return Ok(survey);
+
+            return Ok(new{ survey= surveyOne, questions= datajoin });
         }
+
+        [HttpGet]
+        [Route("api/Surveys/questionId/{id}")]
+        public async Task<IHttpActionResult> GetSurveyQuestionId(int id)
+        {
+           Survey surveyOne = db.Surveys.Find(id);
+
+            var datajoin_v1 = await db.Surveys.Where(s => s.ID == id)
+                .Join(
+                db.Questions,
+                survey => survey.ID,
+                question => question.SurveyID,
+                (survey, question) => new {
+                    ID = question.ID,
+                    Question = question.QuestionText
+                }).ToListAsync();
+
+            return Ok(new { survey = surveyOne, questions = datajoin_v1});
+
+           
+        }
+
 
         // PUT: api/Surveys/5
         [ResponseType(typeof(void))]

@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using SurveyAPIAuthen.Models;
@@ -19,6 +20,7 @@ namespace SurveyAPIAuthen.Controllers.APIController
         // GET: api/Questions
         public IQueryable<Question> GetQuestions()
         {
+            var questions = db.Questions;
             return db.Questions;
         }
 
@@ -33,6 +35,25 @@ namespace SurveyAPIAuthen.Controllers.APIController
             }
 
             return Ok(question);
+        }
+
+        [HttpGet]
+        [Route("api/Questions/CountOption/{id}")]
+        public async Task<IHttpActionResult> GetCountOption(int id)
+        {
+           // Question question = db.Questions.Find(id);
+
+            var optioncount = await db.Questions.Where(q=> q.ID == id).Join(
+                        db.OptionQuestions,
+                        q => q.ID,
+                        op => op.QuestionID,
+                        (q, op) => new
+                        {
+                            IdOQ = op.QuestionID,
+                            Option = op.OptionText
+                        }
+                ).ToListAsync(); 
+            return Ok(new { optioncount= optioncount.Count(), id });
         }
 
         // PUT: api/Questions/5
