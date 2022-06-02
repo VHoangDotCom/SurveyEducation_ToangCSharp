@@ -12,6 +12,7 @@ namespace SurveyAdminAuthen.Models.Entity
         public int ID { get; set; }
         public string Question { get; set; }
         public string Answer { get; set; }
+        public string TokenID { get; set; }
 
         //Foreign key
         public int AnswerSubmitID { get; set; }
@@ -21,6 +22,7 @@ namespace SurveyAdminAuthen.Models.Entity
         {
             this.Question = "";
             this.Answer = "";
+            this.TokenID = "";
         }
     }
 }

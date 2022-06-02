@@ -1,0 +1,18 @@
+namespace SurveyAPIAuthen.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class updateAnswer : DbMigration
+    {
+        public override void Up()
+        {
+            AddColumn("dbo.TextAnswers", "TokenID", c => c.String());
+        }
+        
+        public override void Down()
+        {
+            DropColumn("dbo.TextAnswers", "TokenID");
+        }
+    }
+}
