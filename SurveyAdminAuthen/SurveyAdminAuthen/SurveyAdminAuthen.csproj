@@ -190,6 +190,10 @@
     <Compile Include="Migrations\202206012258439_Initial.Designer.cs">
       <DependentUpon>202206012258439_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202206021536365_UpdateANSWER.cs" />
+    <Compile Include="Migrations\202206021536365_UpdateANSWER.Designer.cs">
+      <DependentUpon>202206021536365_UpdateANSWER.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Entity\AnswerSubmit.cs" />
@@ -319,6 +323,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202206012258439_Initial.resx">
       <DependentUpon>202206012258439_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206021536365_UpdateANSWER.resx">
+      <DependentUpon>202206021536365_UpdateANSWER.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
