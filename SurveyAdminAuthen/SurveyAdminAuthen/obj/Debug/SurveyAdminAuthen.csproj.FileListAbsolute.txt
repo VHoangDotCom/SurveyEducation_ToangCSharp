@@ -216,10 +216,9 @@ D:\epc\Ap-Sem3\Agile Development\Git Project\SurveyAdminAuthen\SurveyAdminAuthen
 D:\epc\Ap-Sem3\Agile Development\Git Project\SurveyAdminAuthen\SurveyAdminAuthen\bin\Microsoft.Owin.Security.OAuth.xml
 D:\epc\Ap-Sem3\Agile Development\Git Project\SurveyAdminAuthen\SurveyAdminAuthen\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 D:\epc\Ap-Sem3\Agile Development\Git Project\SurveyAdminAuthen\SurveyAdminAuthen\obj\Debug\SurveyAdminAuthen.csproj.AssemblyReference.cache
-D:\epc\Ap-Sem3\Agile Development\Git Project\SurveyAdminAuthen\SurveyAdminAuthen\obj\Debug\SurveyAdminAuthen.Migrations.Initial.resources
-D:\epc\Ap-Sem3\Agile Development\Git Project\SurveyAdminAuthen\SurveyAdminAuthen\obj\Debug\SurveyAdminAuthen.csproj.GenerateResource.cache
 D:\epc\Ap-Sem3\Agile Development\Git Project\SurveyAdminAuthen\SurveyAdminAuthen\obj\Debug\SurveyAdminAuthen.csproj.CoreCompileInputs.cache
 D:\epc\Ap-Sem3\Agile Development\Git Project\SurveyAdminAuthen\SurveyAdminAuthen\obj\Debug\SurveyAdminAuthen.csproj.CopyComplete
 D:\epc\Ap-Sem3\Agile Development\Git Project\SurveyAdminAuthen\SurveyAdminAuthen\obj\Debug\SurveyAdminAuthen.dll
 D:\epc\Ap-Sem3\Agile Development\Git Project\SurveyAdminAuthen\SurveyAdminAuthen\obj\Debug\SurveyAdminAuthen.pdb
-D:\epc\Ap-Sem3\Agile Development\Git Project\SurveyAdminAuthen\SurveyAdminAuthen\obj\Debug\SurveyAdminAuthen.Migrations.UpdateANSWER.resources
+D:\epc\Ap-Sem3\Agile Development\Git Project\SurveyAdminAuthen\SurveyAdminAuthen\obj\Debug\SurveyAdminAuthen.Migrations.InitDB.resources
+D:\epc\Ap-Sem3\Agile Development\Git Project\SurveyAdminAuthen\SurveyAdminAuthen\obj\Debug\SurveyAdminAuthen.csproj.GenerateResource.cache
