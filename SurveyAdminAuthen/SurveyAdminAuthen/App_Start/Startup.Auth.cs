@@ -54,9 +54,9 @@ namespace SurveyAdminAuthen
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+                appId: "1216264955869599",
+                appSecret: "e614c816e163d8360a7fc0305b69e1e7");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{

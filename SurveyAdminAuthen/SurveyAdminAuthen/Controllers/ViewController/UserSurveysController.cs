@@ -16,6 +16,7 @@ namespace SurveyAdminAuthen.Controllers.ViewController
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: UserSurveys
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             var userSurveys = db.UserSurveys.Include(u => u.Survey);
