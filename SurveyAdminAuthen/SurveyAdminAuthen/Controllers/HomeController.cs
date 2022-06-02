@@ -13,7 +13,7 @@ namespace SurveyAdminAuthen.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Mighty Admin")]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

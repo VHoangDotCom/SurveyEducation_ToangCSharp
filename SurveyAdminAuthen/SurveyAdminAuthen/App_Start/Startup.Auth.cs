@@ -58,11 +58,11 @@ namespace SurveyAdminAuthen
                 appId: "1216264955869599",
                 appSecret: "e614c816e163d8360a7fc0305b69e1e7");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "633720633677-8vve06rhk3c4glg0ke3si6ij22mcri05.apps.googleusercontent.com",
+                ClientSecret = "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"
+            });
         }
     }
 }
