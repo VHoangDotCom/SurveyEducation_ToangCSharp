@@ -12,7 +12,7 @@ namespace SurveyAdminAuthen.Models.Entity
         public int ID { get; set; }
 
         //Foreign key
-        public int QuestionID { get; set; }
+        public int SurveyID { get; set; }
         public virtual Survey Survey { get; set; }
 
         public ICollection<TextAnswer> TextAnswers { get; set; }

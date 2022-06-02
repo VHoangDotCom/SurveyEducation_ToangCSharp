@@ -222,3 +222,4 @@ D:\epc\Ap-Sem3\Agile Development\Git Project\SurveyAdminAuthen\SurveyAdminAuthen
 D:\epc\Ap-Sem3\Agile Development\Git Project\SurveyAdminAuthen\SurveyAdminAuthen\obj\Debug\SurveyAdminAuthen.pdb
 D:\epc\Ap-Sem3\Agile Development\Git Project\SurveyAdminAuthen\SurveyAdminAuthen\obj\Debug\SurveyAdminAuthen.Migrations.InitDB.resources
 D:\epc\Ap-Sem3\Agile Development\Git Project\SurveyAdminAuthen\SurveyAdminAuthen\obj\Debug\SurveyAdminAuthen.csproj.GenerateResource.cache
+D:\epc\Ap-Sem3\Agile Development\Git Project\SurveyAdminAuthen\SurveyAdminAuthen\obj\Debug\SurveyAdminAuthen.Migrations.UpdateDB.resources
