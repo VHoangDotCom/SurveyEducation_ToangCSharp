@@ -38,7 +38,8 @@ namespace WebApplication1.Controllers.APIControllers
                      ID = question.ID,
                      SurveyID = question.SurveyID,
                      QuestionText = question.QuestionText,
-                     QuestionType = question.QuestionType
+                     QuestionType = question.QuestionType,
+                     Requied = question.Required
                  }
                  ).ToListAsync();
 
@@ -57,13 +58,11 @@ namespace WebApplication1.Controllers.APIControllers
                  .Join(
                  db.Answers,
                  survey => survey.ID,
-                   answer=> answer.SurveyID,
+                  answer=> answer.SurveyID,
                  (survey, answer) => new {
                     ID = answer.ID,
                  }).ToListAsync();
             return Ok(datajoin_v1);
-
-
         }
 
         // PUT: api/Surveys/5

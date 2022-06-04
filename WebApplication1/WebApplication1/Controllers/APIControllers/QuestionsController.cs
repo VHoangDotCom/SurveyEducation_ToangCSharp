@@ -26,15 +26,21 @@ namespace WebApplication1.Controllers.APIControllers
 
         // GET: api/Questions/5
         [ResponseType(typeof(Question))]
-        public IHttpActionResult GetQuestion(int id)
+        public async  Task<IHttpActionResult> GetQuestion(int id)
         {
-            Question question = db.Questions.Find(id);
-            if (question == null)
-            {
-                return NotFound();
-            }
+            var datajoin = await db.Questions.Where(s => s.ID == id)
+               .Join(
+               db.OptionQuestions,
+               question => question.ID,
+                optionquestion => optionquestion.QuestionID,
+               (question, optionquestion) => new {
+                   ID = optionquestion.ID,
+                   OptionText = optionquestion.OptionText,
 
-            return Ok(question);
+               }
+               ).ToListAsync();
+
+            return Ok(datajoin);
         }
 
         [HttpGet]
