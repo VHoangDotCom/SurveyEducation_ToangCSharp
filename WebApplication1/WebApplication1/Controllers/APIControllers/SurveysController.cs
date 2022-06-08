@@ -29,7 +29,7 @@ namespace WebApplication1.Controllers.APIControllers
         public async Task<IHttpActionResult> GetSurvey(int id)
         {
             Survey surveyOne = db.Surveys.Find(id);
-            var datajoin = await db.Surveys.Where(s => s.ID == id)
+            var questions = await db.Surveys.Where(s => s.ID == id)
                  .Join(
                  db.Questions,
                  survey => survey.ID,
@@ -39,10 +39,12 @@ namespace WebApplication1.Controllers.APIControllers
                      SurveyID = question.SurveyID,
                      QuestionText = question.QuestionText,
                      QuestionType = question.QuestionType,
-                     Requied = question.Required
+                     Requied = question.Required,
+                     OptionQuestions = question.OptionQuestions
                  }
                  ).ToListAsync();
-            return Ok(new { survey = surveyOne, questions = datajoin });
+
+            return Ok(new { survey = surveyOne, questions = questions });
         }
 
 
