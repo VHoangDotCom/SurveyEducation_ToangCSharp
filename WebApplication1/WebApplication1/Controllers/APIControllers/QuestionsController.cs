@@ -28,6 +28,7 @@ namespace WebApplication1.Controllers.APIControllers
         [ResponseType(typeof(Question))]
         public async  Task<IHttpActionResult> GetQuestion(int id)
         {
+            Question questionOne = db.Questions.Find(id);
             var datajoin = await db.Questions.Where(s => s.ID == id)
                .Join(
                db.OptionQuestions,
@@ -35,12 +36,13 @@ namespace WebApplication1.Controllers.APIControllers
                 optionquestion => optionquestion.QuestionID,
                (question, optionquestion) => new {
                    ID = optionquestion.ID,
-                   OptionText = optionquestion.OptionText,
-
+                   OptionText = optionquestion.OptionText
                }
                ).ToListAsync();
 
-            return Ok(datajoin);
+        
+
+            return Ok(new { optionQustion=datajoin ,question= questionOne });
         }
 
         [HttpGet]
@@ -59,6 +61,8 @@ namespace WebApplication1.Controllers.APIControllers
                             Option = op.OptionText
                         }
                 ).ToListAsync();
+           
+
             return Ok(new { optioncount = optioncount.Count(), id });
         }
 

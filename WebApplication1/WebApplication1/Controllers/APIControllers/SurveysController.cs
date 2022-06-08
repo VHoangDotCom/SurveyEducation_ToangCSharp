@@ -42,9 +42,16 @@ namespace WebApplication1.Controllers.APIControllers
                      Requied = question.Required
                  }
                  ).ToListAsync();
-
-
             return Ok(new { survey = surveyOne, questions = datajoin });
+        }
+
+
+        [HttpGet]
+        [Route("api/Surveys/reportSurvey")]
+        public async Task<IHttpActionResult> GetReportSurvey()
+        {
+            var data = await db.Database.SqlQuery<Tuple<int, DateTime,string>>("select ID, EndDate, Title from Surveys").ToArrayAsync();
+            return Ok(data);
         }
 
         [HttpGet]
