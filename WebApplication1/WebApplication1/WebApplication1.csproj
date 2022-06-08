@@ -235,6 +235,7 @@
     <Compile Include="Models\Entity\Category.cs" />
     <Compile Include="Models\Entity\OptionQuestion.cs" />
     <Compile Include="Models\Entity\Question.cs" />
+    <Compile Include="Models\Entity\ReportSurvey.cs" />
     <Compile Include="Models\Entity\Survey.cs" />
     <Compile Include="Models\Entity\TextAnswer.cs" />
     <Compile Include="Models\Entity\UserSurvey.cs" />

@@ -50,8 +50,9 @@ namespace WebApplication1.Controllers.APIControllers
         [Route("api/Surveys/reportSurvey")]
         public async Task<IHttpActionResult> GetReportSurvey()
         {
-            var data = await db.Database.SqlQuery<Tuple<int, DateTime,string>>("select ID, EndDate, Title from Surveys").ToArrayAsync();
-            return Ok(data);
+            var data = await db.Database.SqlQuery<ReportSurvey>("select  Count(EndDate) as soluongSurvey, EndDate from Surveys Group by EndDate").ToArrayAsync();
+       
+            return Ok(new { data });
         }
 
         [HttpGet]

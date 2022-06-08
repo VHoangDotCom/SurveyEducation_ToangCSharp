@@ -39,9 +39,6 @@ namespace WebApplication1.Controllers.APIControllers
                    OptionText = optionquestion.OptionText
                }
                ).ToListAsync();
-
-        
-
             return Ok(new { optionQustion=datajoin ,question= questionOne });
         }
 
